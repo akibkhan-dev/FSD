@@ -1,0 +1,2397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML vs HTML5 — Features, Differences, Good HTML and Bad HTML | B.Tech IT Web Lab</title>
+  <meta name="description" content="Comprehensive educational study on HTML vs HTML5, semantic markup, good vs bad HTML practices, feature showcases, and modern web standards for Full Stack Development.">
+  <meta property="og:title" content="HTML vs HTML5 — Features, Differences, Good & Bad HTML">
+  <meta property="og:description" content="A comprehensive academic laboratory guide on HTML vs HTML5 evolution, semantic web architecture, accessible markup, and coding standards.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <style>
+    /* ==========================================================================
+       CSS CUSTOM PROPERTIES & COLOR PALETTE
+       ========================================================================== */
+    :root {
+      --bg-navy-dark: #070b14;
+      --bg-navy: #0d1527;
+      --bg-navy-surface: #131f38;
+      --bg-navy-card: #182646;
+      
+      --accent-blue: #2563eb;
+      --accent-blue-light: #3b82f6;
+      --accent-electric: #00d2ff;
+      --accent-cyan: #38bdf8;
+      --accent-violet: #8b5cf6;
+      --accent-purple: #a855f7;
+      
+      --bg-light: #f8fafc;
+      --bg-subtle: #f1f5f9;
+      --bg-white: #ffffff;
+      
+      --text-dark: #0f172a;
+      --text-body: #334155;
+      --text-muted: #64748b;
+      --text-white: #ffffff;
+      --text-slate-100: #f1f5f9;
+      --text-slate-300: #cbd5e1;
+      --text-slate-400: #94a3b8;
+      
+      --border-light: #e2e8f0;
+      --border-dark: #1e293b;
+      --border-accent: rgba(56, 189, 248, 0.25);
+      
+      --code-bg: #090e1a;
+      --code-border: #1e293b;
+      --code-text: #e2e8f0;
+      --code-tag: #38bdf8;
+      --code-attr: #c084fc;
+      --code-val: #34d399;
+      --code-doctype: #f59e0b;
+      --code-comment: #64748b;
+      
+      --success-green: #10b981;
+      --success-bg: #ecfdf5;
+      --success-border: #a7f3d0;
+      --success-dark: #065f46;
+      
+      --danger-red: #ef4444;
+      --danger-bg: #fef2f2;
+      --danger-border: #fecaca;
+      --danger-dark: #991b1b;
+      
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      --font-mono: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Monaco, Consolas, "Courier New", monospace;
+      
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+      --shadow-glow: 0 0 30px rgba(56, 189, 248, 0.15);
+      
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-xl: 20px;
+      --radius-full: 9999px;
+      
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* ==========================================================================
+       RESET & BASE STYLES
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-light);
+      color: var(--text-body);
+      line-height: 1.65;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--accent-blue-light);
+      outline-offset: 3px;
+    }
+
+    /* Container Utility */
+    .container {
+      width: 100%;
+      max-width: 1240px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    /* Section Spacing */
+    .section-padding {
+      padding-top: 5.5rem;
+      padding-bottom: 5.5rem;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 780px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.9rem;
+      border-radius: var(--radius-full);
+      margin-bottom: 1rem;
+    }
+
+    .section-eyebrow.blue {
+      background-color: #eff6ff;
+      color: var(--accent-blue);
+      border: 1px solid #bfdbfe;
+    }
+
+    .section-eyebrow.green {
+      background-color: var(--success-bg);
+      color: var(--success-dark);
+      border: 1px solid var(--success-border);
+    }
+
+    .section-eyebrow.red {
+      background-color: var(--danger-bg);
+      color: var(--danger-dark);
+      border: 1px solid var(--danger-border);
+    }
+
+    .section-eyebrow.violet {
+      background-color: #f5f3ff;
+      color: var(--accent-violet);
+      border: 1px solid #ddd6fe;
+    }
+
+    .section-title {
+      font-size: 2.35rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      line-height: 1.25;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .section-description {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ==========================================================================
+       STICKY NAVIGATION BAR
+       ========================================================================== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: rgba(9, 14, 26, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-white);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 4.5rem;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .logo-code {
+      font-family: var(--font-mono);
+      color: var(--accent-cyan);
+      font-weight: 700;
+    }
+
+    .brand-tag {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.2rem 0.5rem;
+      border-radius: var(--radius-sm);
+      background: rgba(37, 99, 235, 0.2);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 0.25rem;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-slate-300);
+      padding: 0.5rem 0.85rem;
+      border-radius: var(--radius-md);
+    }
+
+    .nav-links a:hover {
+      color: var(--text-white);
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-violet) 100%);
+      color: var(--text-white);
+      padding: 0.6rem 1.25rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.45);
+      color: var(--text-white);
+    }
+
+    /* ==========================================================================
+       HERO SECTION (DARK NAVY WITH ELECTRIC ACCENTS)
+       ========================================================================== */
+    .hero-section {
+      background: radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 40%),
+                  radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.15) 0%, transparent 40%),
+                  linear-gradient(180deg, var(--bg-navy-dark) 0%, var(--bg-navy) 100%);
+      color: var(--text-white);
+      padding-top: 5.5rem;
+      padding-bottom: 6rem;
+      border-bottom: 1px solid var(--border-dark);
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    .hero-badge-wrapper {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.4rem 1rem;
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent-cyan);
+      margin-bottom: 1.75rem;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent-electric);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent-electric);
+    }
+
+    .hero-title {
+      font-size: 3.6rem;
+      font-weight: 900;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 30%, var(--accent-cyan) 75%, var(--accent-violet) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-lead {
+      font-size: 1.18rem;
+      line-height: 1.7;
+      color: var(--text-slate-300);
+      margin-bottom: 2.25rem;
+      max-width: 580px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 3.25rem;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-blue-light) 100%);
+      color: var(--text-white);
+      font-size: 0.98rem;
+      font-weight: 600;
+      padding: 0.85rem 1.85rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.55);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(30, 41, 59, 0.7);
+      color: var(--text-white);
+      font-size: 0.98rem;
+      font-weight: 600;
+      padding: 0.85rem 1.85rem;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(51, 65, 85, 0.8);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Hero Features Row */
+    .hero-features-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .hero-feature-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .hero-feature-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-white);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .hero-feature-title::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--accent-cyan);
+    }
+
+    .hero-feature-desc {
+      font-size: 0.8rem;
+      color: var(--text-slate-400);
+      line-height: 1.4;
+    }
+
+    /* Hero Code Card Preview */
+    .hero-code-card {
+      background: var(--code-bg);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), var(--shadow-glow);
+    }
+
+    .window-header {
+      background: #111827;
+      padding: 0.85rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #1f2937;
+    }
+
+    .window-dots {
+      display: flex;
+      gap: 0.45rem;
+    }
+
+    .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #f59e0b; }
+    .dot-green { background: #10b981; }
+
+    .window-filename {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-slate-400);
+    }
+
+    .window-lang {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent-cyan);
+      padding: 0.15rem 0.55rem;
+      border-radius: var(--radius-sm);
+    }
+
+    /* Code Block Formatting */
+    pre.code-editor {
+      margin: 0;
+      padding: 1.25rem 1rem;
+      background-color: var(--code-bg);
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      line-height: 1.7;
+    }
+
+    pre.code-editor code {
+      display: block;
+      counter-reset: line;
+    }
+
+    .code-line {
+      display: block;
+      counter-increment: line;
+      position: relative;
+      padding-left: 2.8rem;
+      white-space: pre;
+    }
+
+    .code-line::before {
+      content: counter(line);
+      position: absolute;
+      left: 0;
+      width: 2rem;
+      text-align: right;
+      color: #475569;
+      user-select: none;
+      font-size: 0.76rem;
+    }
+
+    /* Syntax Highlighting */
+    .hl-doctype { color: var(--code-doctype); font-weight: 600; }
+    .hl-tag { color: var(--code-tag); font-weight: 600; }
+    .hl-attr { color: var(--code-attr); }
+    .hl-val { color: var(--code-val); }
+    .hl-comment { color: var(--code-comment); font-style: italic; }
+    .hl-txt { color: var(--code-text); }
+
+    /* ==========================================================================
+       INTRODUCTION SECTION
+       ========================================================================== */
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .intro-card {
+      background: var(--bg-white);
+      border-radius: var(--radius-xl);
+      padding: 2.5rem;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .intro-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-xl);
+      border-color: #cbd5e1;
+    }
+
+    .intro-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+    }
+
+    .intro-tag {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 0.3rem 0.75rem;
+      border-radius: var(--radius-sm);
+    }
+
+    .intro-tag.legacy {
+      background-color: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+
+    .intro-tag.modern {
+      background-color: #eff6ff;
+      color: var(--accent-blue);
+      border: 1px solid #bfdbfe;
+    }
+
+    .intro-era {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .intro-card-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+    }
+
+    .intro-card-text {
+      color: var(--text-body);
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .intro-bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: auto;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .intro-bullet-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.94rem;
+      color: var(--text-body);
+    }
+
+    .intro-bullet-icon {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: bold;
+      margin-top: 2px;
+    }
+
+    .icon-neutral { background: #e2e8f0; color: #475569; }
+    .icon-check { background: #dcfce7; color: #166534; }
+
+    /* Evolution Timeline Banner */
+    .evolution-banner {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: var(--text-white);
+      border-radius: var(--radius-xl);
+      padding: 2.25rem 2.5rem;
+      border: 1px solid #334155;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .evolution-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-white);
+      line-height: 1.3;
+    }
+
+    .evolution-subtitle {
+      font-size: 0.88rem;
+      color: var(--accent-cyan);
+      margin-top: 0.25rem;
+      font-weight: 600;
+    }
+
+    .evolution-desc {
+      font-size: 0.95rem;
+      color: var(--text-slate-300);
+      line-height: 1.65;
+    }
+
+    /* ==========================================================================
+       COMPARISON TABLE SECTION
+       ========================================================================== */
+    .comparison-section {
+      background-color: var(--bg-white);
+      border-top: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .table-responsive-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-lg);
+      margin-bottom: 2.5rem;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      min-width: 820px;
+      font-size: 0.95rem;
+    }
+
+    .comparison-table thead tr {
+      background: #0f172a;
+      color: var(--text-white);
+    }
+
+    .comparison-table th {
+      padding: 1.25rem 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      border-bottom: 2px solid #334155;
+    }
+
+    .col-feature { width: 24%; }
+    .col-html4 { width: 38%; background-color: #1e293b; }
+    .col-html5 { width: 38%; background: linear-gradient(90deg, #1e3a8a 0%, #1e40af 100%); }
+
+    .th-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border-radius: var(--radius-sm);
+      margin-left: 0.5rem;
+      vertical-align: middle;
+      font-weight: 700;
+    }
+
+    .th-badge.badge-old { background: #475569; color: #f8fafc; }
+    .th-badge.badge-new { background: var(--accent-cyan); color: #0f172a; }
+
+    .comparison-table tbody tr {
+      border-bottom: 1px solid var(--border-light);
+      transition: background-color 0.15s ease;
+    }
+
+    .comparison-table tbody tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    .comparison-table tbody tr:hover {
+      background-color: #f1f5f9;
+    }
+
+    .comparison-table td {
+      padding: 1.15rem 1.5rem;
+      vertical-align: top;
+      line-height: 1.55;
+    }
+
+    .feature-name {
+      font-weight: 700;
+      color: var(--text-dark);
+      display: block;
+    }
+
+    .feature-num {
+      display: inline-block;
+      font-size: 0.75rem;
+      color: var(--accent-blue);
+      font-weight: 800;
+      margin-bottom: 0.15rem;
+      font-family: var(--font-mono);
+    }
+
+    .code-pill {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      background: #f1f5f9;
+      color: #0f172a;
+      padding: 0.15rem 0.45rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid #cbd5e1;
+      margin-top: 0.35rem;
+      word-break: break-all;
+    }
+
+    .code-pill.pill-green {
+      background: #ecfdf5;
+      color: #065f46;
+      border-color: #a7f3d0;
+    }
+
+    .code-pill.pill-red {
+      background: #fef2f2;
+      color: #991b1b;
+      border-color: #fecaca;
+    }
+
+    /* Takeaway Callout Card */
+    .takeaway-card {
+      background: linear-gradient(135deg, #eff6ff 0%, #f5f3ff 100%);
+      border: 1px solid #bfdbfe;
+      border-radius: var(--radius-lg);
+      padding: 1.75rem 2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+
+    .takeaway-icon {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      background: var(--accent-blue);
+      color: var(--text-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .takeaway-content h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 0.35rem;
+    }
+
+    .takeaway-content p {
+      font-size: 0.98rem;
+      color: var(--text-body);
+      line-height: 1.6;
+    }
+
+    /* ==========================================================================
+       GOOD HTML & BAD HTML CODE SECTIONS
+       ========================================================================== */
+    .code-comparison-container {
+      display: flex;
+      flex-direction: column;
+      gap: 4.5rem;
+    }
+
+    .showcase-header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .showcase-title-group {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .status-badge {
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-full);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .status-badge.good {
+      background: #dcfce7;
+      color: #15803d;
+      border: 1px solid #86efac;
+    }
+
+    .status-badge.bad {
+      background: #fee2e2;
+      color: #b91c1c;
+      border: 1px solid #fca5a5;
+    }
+
+    .showcase-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .title-good { color: #065f46; }
+    .title-bad { color: #991b1b; }
+
+    .code-panel {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+      border: 1px solid #1e293b;
+      margin-bottom: 2rem;
+    }
+
+    .code-panel.panel-good {
+      border-top: 4px solid var(--success-green);
+    }
+
+    .code-panel.panel-bad {
+      border-top: 4px solid var(--danger-red);
+    }
+
+    /* Explanation Grid Cards */
+    .explanation-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .explanation-card {
+      background: var(--bg-white);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .explanation-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: #cbd5e1;
+    }
+
+    .explanation-card.green-accent {
+      border-top: 3px solid var(--success-green);
+    }
+
+    .explanation-card.red-accent {
+      border-top: 3px solid var(--danger-red);
+    }
+
+    .explanation-icon {
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      display: inline-block;
+    }
+
+    .explanation-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .explanation-desc {
+      font-size: 0.92rem;
+      color: var(--text-body);
+      line-height: 1.6;
+    }
+
+    /* Detailed Mistake Cards (Bad HTML Section) */
+    .mistakes-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .mistake-card {
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem 2rem;
+      border: 1px solid var(--border-light);
+      border-left: 5px solid var(--danger-red);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .mistake-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .mistake-index {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 800;
+      background: #fee2e2;
+      color: #991b1b;
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-sm);
+    }
+
+    .mistake-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      flex: 1;
+      margin-left: 0.75rem;
+    }
+
+    .mistake-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .mistake-box {
+      background: #f8fafc;
+      padding: 1.25rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-light);
+    }
+
+    .mistake-box h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .mistake-box.flaw h4 { color: #dc2626; }
+    .mistake-box.solution h4 { color: #16a34a; }
+
+    .mistake-box p {
+      font-size: 0.9rem;
+      color: var(--text-body);
+      line-height: 1.55;
+    }
+
+    .mini-snippet {
+      margin-top: 0.75rem;
+      background: var(--code-bg);
+      color: #e2e8f0;
+      padding: 0.65rem 0.85rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      overflow-x: auto;
+    }
+
+    /* ==========================================================================
+       HTML5 FEATURE SHOWCASE
+       ========================================================================== */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: var(--bg-white);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-xl);
+      border-color: #cbd5e1;
+    }
+
+    .feature-card-header {
+      padding: 1.75rem 2rem 1.25rem;
+    }
+
+    .feature-card-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: #eff6ff;
+      color: var(--accent-blue);
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-full);
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-card-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-card-desc {
+      font-size: 0.95rem;
+      color: var(--text-body);
+      line-height: 1.6;
+    }
+
+    .feature-card-code {
+      margin-top: auto;
+      background: var(--code-bg);
+      border-top: 1px solid #1e293b;
+      padding: 1.25rem 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      overflow-x: auto;
+      color: #cbd5e1;
+      line-height: 1.65;
+    }
+
+    /* ==========================================================================
+       KNOWLEDGE SUMMARY: WHY MODERN HTML MATTERS
+       ========================================================================== */
+    .summary-section {
+      background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+      border-top: 1px solid var(--border-light);
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .benefit-item {
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.75rem;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .benefit-item:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--accent-blue-light);
+    }
+
+    .benefit-icon-box {
+      width: 54px;
+      height: 54px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      color: var(--accent-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 1.25rem;
+      border: 1px solid #bfdbfe;
+    }
+
+    .benefit-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .benefit-text {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* Academic Conclusion Box */
+    .conclusion-box {
+      background: var(--bg-white);
+      border-radius: var(--radius-xl);
+      padding: 3rem;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-md);
+      margin-bottom: 3rem;
+    }
+
+    .conclusion-box h3 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+    }
+
+    .conclusion-box p {
+      font-size: 1.05rem;
+      color: var(--text-body);
+      line-height: 1.75;
+      margin-bottom: 1.25rem;
+    }
+
+    .conclusion-quote-banner {
+      margin-top: 2rem;
+      padding: 1.5rem 2rem;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: var(--text-white);
+      border-radius: var(--radius-lg);
+      border-left: 5px solid var(--accent-cyan);
+      text-align: center;
+    }
+
+    .conclusion-quote {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--text-white);
+    }
+
+    /* ==========================================================================
+       PRACTICAL SUBMISSION CARD (ACADEMIC LAB RECORD)
+       ========================================================================== */
+    .submission-card {
+      background: var(--bg-white);
+      border-radius: var(--radius-xl);
+      border: 2px solid #cbd5e1;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      max-width: 820px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .submission-header {
+      background: linear-gradient(135deg, #090e1a 0%, #1e293b 100%);
+      color: var(--text-white);
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #334155;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .submission-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .submission-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: rgba(56, 189, 248, 0.2);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .submission-body {
+      padding: 2rem;
+    }
+
+    .submission-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+
+    .submission-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      padding: 0.75rem 1rem;
+      background: #f8fafc;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-light);
+    }
+
+    .submission-label {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .submission-val {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .placeholder-edit {
+      color: var(--accent-blue);
+      background: #eff6ff;
+      padding: 0.1rem 0.5rem;
+      border-radius: var(--radius-sm);
+      display: inline-block;
+      border: 1px dashed #93c5fd;
+    }
+
+    /* ==========================================================================
+       DARK FOOTER
+       ========================================================================== */
+    .site-footer {
+      background: #060911;
+      color: var(--text-slate-400);
+      padding-top: 4.5rem;
+      padding-bottom: 2.5rem;
+      border-top: 1px solid #1e293b;
+      font-size: 0.92rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-white);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer-desc {
+      color: var(--text-slate-400);
+      line-height: 1.65;
+      max-width: 420px;
+    }
+
+    .footer-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-white);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .footer-links a {
+      color: var(--text-slate-400);
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-cyan);
+      padding-left: 4px;
+    }
+
+    .footer-bottom {
+      padding-top: 2rem;
+      border-top: 1px solid #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.85rem;
+    }
+
+    .footer-copy {
+      color: var(--text-muted);
+    }
+
+    .footer-badge {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent-cyan);
+      background: rgba(30, 41, 59, 0.7);
+      padding: 0.3rem 0.75rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid #334155;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE DESIGN (MEDIA QUERIES)
+       ========================================================================== */
+    @media (max-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .hero-title {
+        font-size: 3rem;
+      }
+
+      .intro-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .evolution-banner {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none; /* Mobile view: clean header with logo & CTA */
+      }
+
+      .hero-title {
+        font-size: 2.35rem;
+      }
+
+      .hero-features-row {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        font-size: 1.85rem;
+      }
+
+      .mistake-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .submission-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .btn-primary, .btn-secondary {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       STICKY NAVIGATION BAR
+       ========================================================================== -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="#hero" class="brand-logo" aria-label="Web Lab Practical Home">
+        <span class="logo-code">&lt;/&gt;</span>
+        <span>WEB LAB</span>
+        <span class="brand-tag">B.Tech IT</span>
+      </a>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="#introduction">Introduction</a></li>
+          <li><a href="#comparison">Comparison</a></li>
+          <li><a href="#good-html">Good HTML</a></li>
+          <li><a href="#bad-html">Bad HTML</a></li>
+          <li><a href="#features">HTML5 Features</a></li>
+          <li><a href="#conclusion">Conclusion</a></li>
+        </ul>
+      </nav>
+
+      <a href="#comparison" class="nav-cta">
+        <span>Explore Differences</span>
+        <span aria-hidden="true">&darr;</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         HERO SECTION
+         ========================================================================== -->
+    <section id="hero" class="hero-section" aria-labelledby="hero-heading">
+      <div class="container">
+        <div class="hero-grid">
+          
+          <!-- Hero Text Column -->
+          <div class="hero-text-col">
+            <div class="hero-badge-wrapper">
+              <span class="badge-dot" aria-hidden="true"></span>
+              <span>FULL STACK DEVELOPMENT | PRACTICAL</span>
+            </div>
+
+            <h1 id="hero-heading" class="hero-title">
+              HTML <span class="gradient-text">vs HTML5</span>
+            </h1>
+
+            <p class="hero-lead">
+              Discover the architectural evolution from static tag formatting in HTML 4.01 to the modern, semantic, accessible, and multimedia-rich HTML5 Living Standard powering today’s open web.
+            </p>
+
+            <div class="hero-buttons">
+              <a href="#comparison" class="btn-primary">
+                <span>Explore Differences</span>
+                <span aria-hidden="true">&rarr;</span>
+              </a>
+              <a href="#good-html" class="btn-secondary">
+                <span>View Code Examples</span>
+                <span aria-hidden="true">&darr;</span>
+              </a>
+            </div>
+
+            <div class="hero-features-row">
+              <div class="hero-feature-item">
+                <span class="hero-feature-title">Semantic HTML</span>
+                <span class="hero-feature-desc">&lt;header&gt;, &lt;main&gt;, &lt;article&gt;</span>
+              </div>
+              <div class="hero-feature-item">
+                <span class="hero-feature-title">Native Multimedia</span>
+                <span class="hero-feature-desc">Zero plugins for video &amp; audio</span>
+              </div>
+              <div class="hero-feature-item">
+                <span class="hero-feature-title">Modern Forms</span>
+                <span class="hero-feature-desc">Client validation &amp; rich input types</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Code Card Column -->
+          <div class="hero-visual-col">
+            <div class="hero-code-card" role="region" aria-label="Modern HTML5 Code Example">
+              <div class="window-header">
+                <div class="window-dots" aria-hidden="true">
+                  <span class="dot dot-red"></span>
+                  <span class="dot dot-yellow"></span>
+                  <span class="dot dot-green"></span>
+                </div>
+                <span class="window-filename">index.html</span>
+                <span class="window-lang">HTML5</span>
+              </div>
+              
+              <pre class="code-editor"><code><span class="code-line"><span class="hl-doctype">&lt;!DOCTYPE html&gt;</span></span><span class="code-line"><span class="hl-tag">&lt;html</span> <span class="hl-attr">lang</span>=<span class="hl-val">"en"</span><span class="hl-tag">&gt;</span></span><span class="code-line"><span class="hl-tag">&lt;head&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;meta</span> <span class="hl-attr">charset</span>=<span class="hl-val">"UTF-8"</span><span class="hl-tag">&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;meta</span> <span class="hl-attr">name</span>=<span class="hl-val">"viewport"</span> <span class="hl-attr">content</span>=<span class="hl-val">"width=device-width, initial-scale=1.0"</span><span class="hl-tag">&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;title&gt;</span>Modern Web Application<span class="hl-tag">&lt;/title&gt;</span></span><span class="code-line"><span class="hl-tag">&lt;/head&gt;</span></span><span class="code-line"><span class="hl-tag">&lt;body&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;header&gt;</span></span><span class="code-line">    <span class="hl-tag">&lt;nav&gt;</span><span class="hl-tag">&lt;a</span> <span class="hl-attr">href</span>=<span class="hl-val">"#features"</span><span class="hl-tag">&gt;</span>Explore<span class="hl-tag">&lt;/a&gt;</span><span class="hl-tag">&lt;/nav&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;/header&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;main&gt;</span></span><span class="code-line">    <span class="hl-tag">&lt;article&gt;</span></span><span class="code-line">      <span class="hl-tag">&lt;h1&gt;</span>Semantic Web Standards<span class="hl-tag">&lt;/h1&gt;</span></span><span class="code-line">      <span class="hl-tag">&lt;p&gt;</span>Accessible, maintainable markup.<span class="hl-tag">&lt;/p&gt;</span></span><span class="code-line">    <span class="hl-tag">&lt;/article&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;/main&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;footer&gt;</span><span class="hl-tag">&lt;p&gt;</span>&copy; 2026 Academic Lab<span class="hl-tag">&lt;/p&gt;</span><span class="hl-tag">&lt;/footer&gt;</span></span><span class="code-line"><span class="hl-tag">&lt;/body&gt;</span></span><span class="code-line"><span class="hl-tag">&lt;/html&gt;</span></span></code></pre>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         INTRODUCTION SECTION
+         ========================================================================== -->
+    <section id="introduction" class="section-padding" aria-labelledby="intro-heading">
+      <div class="container">
+        
+        <div class="section-header">
+          <span class="section-eyebrow blue">Foundational Knowledge</span>
+          <h2 id="intro-heading" class="section-title">Understanding HTML &amp; The HTML5 Revolution</h2>
+          <p class="section-description">
+            HyperText Markup Language serves as the structural skeleton of the World Wide Web. Learn how historical versions paved the path for HTML5 to emerge as the universal standard.
+          </p>
+        </div>
+
+        <div class="intro-grid">
+          
+          <!-- Card 1: Traditional HTML -->
+          <article class="intro-card" aria-labelledby="card-html4-title">
+            <div class="intro-card-header">
+              <span class="intro-tag legacy">HTML 4.01 / XHTML</span>
+              <span class="intro-era">1997 &ndash; 2008</span>
+            </div>
+            <h3 id="card-html4-title" class="intro-card-title">Traditional HTML</h3>
+            <p class="intro-card-text">
+              HTML (HyperText Markup Language) was originally conceived by Tim Berners-Lee to describe the layout of scientific research documents. Throughout HTML 2.0, HTML 3.2, and HTML 4.01 (1999), the language focused on basic page structure. However, developers lacked specialized structural tags and were forced to rely on heavy generic <code class="code-pill">&lt;div&gt;</code> nesting and presentational elements.
+            </p>
+            <ul class="intro-bullet-list">
+              <li class="intro-bullet-item">
+                <span class="intro-bullet-icon icon-neutral">&bull;</span>
+                <span>Complex, brittle SGML-based Document Type Declarations (Doctypes).</span>
+              </li>
+              <li class="intro-bullet-item">
+                <span class="intro-bullet-icon icon-neutral">&bull;</span>
+                <span>Audio, video, and vector animations strictly required third-party plugins (Adobe Flash, QuickTime).</span>
+              </li>
+              <li class="intro-bullet-item">
+                <span class="intro-bullet-icon icon-neutral">&bull;</span>
+                <span>Client-side form validation required lengthy, fragile custom JavaScript scripts.</span>
+              </li>
+              <li class="intro-bullet-item">
+                <span class="intro-bullet-icon icon-neutral">&bull;</span>
+                <span>Browser storage was strictly confined to 4KB HTTP cookies transmitted on every request.</span>
+              </li>
+            </ul>
+          </article>
+
+          <!-- Card 2: Modern HTML5 -->
+          <article class="intro-card" aria-labelledby="card-html5-title">
+            <div class="intro-card-header">
+              <span class="intro-tag modern">HTML5 &amp; Living Standard</span>
+              <span class="intro-era">2014 &ndash; Present</span>
+            </div>
+            <h3 id="card-html5-title" class="intro-card-title">Modern HTML5</h3>
+            <p class="intro-card-text">
+              Introduced as a collaboration between the Web Hypertext Application Technology Working Group (WHATWG) and the W3C, HTML5 redefined HTML from a mere document markup syntax into a complete application platform. HTML5 introduced standardized landmark tags, native media players, hardware-accelerated 2D canvas, offline storage, and responsive form validation.
+            </p>
+            <ul class="intro-bullet-list">
+              <li class="intro-bullet-item">
+                <span class="intro-bullet-icon icon-check">&check;</span>
+                <span>Universal, future-proof Doctype: <code class="code-pill pill-green">&lt;!DOCTYPE html&gt;</code>.</span>
+              </li>
+              <li class="intro-bullet-item">
+                <span class="intro-bullet-icon icon-check">&check;</span>
+                <span>First-class semantic landmark tags (<code class="code-pill">&lt;main&gt;</code>, <code class="code-pill">&lt;nav&gt;</code>, <code class="code-pill">&lt;section&gt;</code>).</span>
+              </li>
+              <li class="intro-bullet-item">
+                <span class="intro-bullet-icon icon-check">&check;</span>
+                <span>Native media without plugins: <code class="code-pill">&lt;video&gt;</code> and <code class="code-pill">&lt;audio&gt;</code> tags.</span>
+              </li>
+              <li class="intro-bullet-item">
+                <span class="intro-bullet-icon icon-check">&check;</span>
+                <span>Standardized browser client storage via <code class="code-pill">localStorage</code> and <code class="code-pill">sessionStorage</code>.</span>
+              </li>
+            </ul>
+          </article>
+
+        </div>
+
+        <!-- Historical Evolution Banner -->
+        <div class="evolution-banner">
+          <div>
+            <h3 class="evolution-title">From Fixed Snapshot to Continuous Standard</h3>
+            <p class="evolution-subtitle">W3C Recommendation to WHATWG Living Standard</p>
+          </div>
+          <div>
+            <p class="evolution-desc">
+              While HTML5 achieved official W3C Recommendation status in October 2014, the web community agreed in 2019 that HTML should no longer be released as static numbered versions (like HTML6). Instead, modern HTML is maintained as the <strong>HTML Living Standard</strong> by the WHATWG, continually evolving with browser capabilities while guaranteeing backward compatibility.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         HTML VS HTML5 COMPARISON SECTION (TABLE)
+         ========================================================================== -->
+    <section id="comparison" class="section-padding comparison-section" aria-labelledby="comparison-heading">
+      <div class="container">
+        
+        <div class="section-header">
+          <span class="section-eyebrow blue">Technical Analysis</span>
+          <h2 id="comparison-heading" class="section-title">Comprehensive Comparison: HTML vs HTML5</h2>
+          <p class="section-description">
+            A point-by-point architectural breakdown of 12 critical differences across standards, syntax, multimedia, form controls, storage, and accessibility.
+          </p>
+        </div>
+
+        <div class="table-responsive-wrapper">
+          <table class="comparison-table" aria-label="Detailed technical comparison table between HTML 4.01 and HTML5">
+            <thead>
+              <tr>
+                <th scope="col" class="col-feature">Feature &amp; Domain</th>
+                <th scope="col" class="col-html4">
+                  Traditional HTML (4.01 / XHTML)
+                  <span class="th-badge badge-old">Legacy</span>
+                </th>
+                <th scope="col" class="col-html5">
+                  Modern HTML5 (Living Standard)
+                  <span class="th-badge badge-new">Standard</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              <!-- Row 1: Standard & Evolution -->
+              <tr>
+                <td>
+                  <span class="feature-num">01</span>
+                  <span class="feature-name">Standard &amp; Specification</span>
+                </td>
+                <td>
+                  Fixed, monolithic versions published as W3C recommendations with multi-year delays between editions.
+                </td>
+                <td>
+                  Continuously updated <strong>WHATWG Living Standard</strong> ensuring immediate web compatibility and modern updates.
+                </td>
+              </tr>
+
+              <!-- Row 2: Doctype Declaration -->
+              <tr>
+                <td>
+                  <span class="feature-num">02</span>
+                  <span class="feature-name">Doctype Declaration</span>
+                </td>
+                <td>
+                  Verbose, rigid SGML DTD reference:<br>
+                  <code class="code-pill pill-red">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;</code>
+                </td>
+                <td>
+                  Clean, minimalist, and universal:<br>
+                  <code class="code-pill pill-green">&lt;!DOCTYPE html&gt;</code>
+                </td>
+              </tr>
+
+              <!-- Row 3: Semantic Elements -->
+              <tr>
+                <td>
+                  <span class="feature-num">03</span>
+                  <span class="feature-name">Document Semantics</span>
+                </td>
+                <td>
+                  Lacked native landmark tags. Developers relied heavily on non-semantic wrappers like <code class="code-pill">&lt;div id="header"&gt;</code> and <code class="code-pill">&lt;div class="footer"&gt;</code>.
+                </td>
+                <td>
+                  Rich native semantic landmarks: <code class="code-pill pill-green">&lt;header&gt;</code>, <code class="code-pill pill-green">&lt;nav&gt;</code>, <code class="code-pill pill-green">&lt;main&gt;</code>, <code class="code-pill pill-green">&lt;section&gt;</code>, <code class="code-pill pill-green">&lt;article&gt;</code>, <code class="code-pill pill-green">&lt;aside&gt;</code>, and <code class="code-pill pill-green">&lt;footer&gt;</code>.
+                </td>
+              </tr>
+
+              <!-- Row 4: Audio and Video -->
+              <tr>
+                <td>
+                  <span class="feature-num">04</span>
+                  <span class="feature-name">Audio &amp; Video Media</span>
+                </td>
+                <td>
+                  No native playback capability. Required heavy, insecure third-party browser plugins like Adobe Flash Player, QuickTime, or Silverlight.
+                </td>
+                <td>
+                  Native multimedia elements: <code class="code-pill pill-green">&lt;audio controls&gt;</code> and <code class="code-pill pill-green">&lt;video controls&gt;</code> with multi-format fallback using <code class="code-pill">&lt;source&gt;</code>.
+                </td>
+              </tr>
+
+              <!-- Row 5: Graphics & Canvas -->
+              <tr>
+                <td>
+                  <span class="feature-num">05</span>
+                  <span class="feature-name">Graphics &amp; Visuals</span>
+                </td>
+                <td>
+                  Dynamic vector graphics and programmatic rendering required external applets (Java Applets, Flash, VML).
+                </td>
+                <td>
+                  Built-in raster graphics rendering via the <code class="code-pill pill-green">&lt;canvas&gt;</code> element and native inline <code class="code-pill pill-green">&lt;svg&gt;</code> support.
+                </td>
+              </tr>
+
+              <!-- Row 6: Form Input Types -->
+              <tr>
+                <td>
+                  <span class="feature-num">06</span>
+                  <span class="feature-name">Form Input Types</span>
+                </td>
+                <td>
+                  Extremely limited basic input types: <code class="code-pill">text</code>, <code class="code-pill">password</code>, <code class="code-pill">checkbox</code>, <code class="code-pill">radio</code>, <code class="code-pill">file</code>, and <code class="code-pill">hidden</code>.
+                </td>
+                <td>
+                  Comprehensive specialized types: <code class="code-pill pill-green">email</code>, <code class="code-pill pill-green">tel</code>, <code class="code-pill pill-green">url</code>, <code class="code-pill pill-green">number</code>, <code class="code-pill pill-green">range</code>, <code class="code-pill pill-green">date</code>, <code class="code-pill pill-green">time</code>, <code class="code-pill pill-green">color</code>, and <code class="code-pill pill-green">search</code>.
+                </td>
+              </tr>
+
+              <!-- Row 7: Form Validation -->
+              <tr>
+                <td>
+                  <span class="feature-num">07</span>
+                  <span class="feature-name">Form Validation</span>
+                </td>
+                <td>
+                  No built-in browser validation. Developers had to write complex JavaScript regex routines for required fields and formatting.
+                </td>
+                <td>
+                  Declarative client-side validation attributes: <code class="code-pill pill-green">required</code>, <code class="code-pill pill-green">pattern</code>, <code class="code-pill pill-green">min</code>, <code class="code-pill pill-green">max</code>, and <code class="code-pill pill-green">step</code> with native UI error tooltips.
+                </td>
+              </tr>
+
+              <!-- Row 8: Character Encoding -->
+              <tr>
+                <td>
+                  <span class="feature-num">08</span>
+                  <span class="feature-name">Character Encoding</span>
+                </td>
+                <td>
+                  Lengthy HTTP-equiv header declaration:<br>
+                  <code class="code-pill pill-red">&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;</code>
+                </td>
+                <td>
+                  Concise and standardized meta declaration:<br>
+                  <code class="code-pill pill-green">&lt;meta charset="UTF-8"&gt;</code>
+                </td>
+              </tr>
+
+              <!-- Row 9: Browser Client Storage -->
+              <tr>
+                <td>
+                  <span class="feature-num">09</span>
+                  <span class="feature-name">Client-Side Storage</span>
+                </td>
+                <td>
+                  Limited solely to HTTP Cookies (maximum 4 KB per domain), which sent storage payloads in every HTTP header request.
+                </td>
+                <td>
+                  Robust Web Storage APIs: <code class="code-pill pill-green">localStorage</code> (persistent 5&ndash;10 MB) and <code class="code-pill pill-green">sessionStorage</code> (tab-scoped) without HTTP overhead.
+                </td>
+              </tr>
+
+              <!-- Row 10: Accessibility (A11y) -->
+              <tr>
+                <td>
+                  <span class="feature-num">10</span>
+                  <span class="feature-name">Accessibility &amp; A11y</span>
+                </td>
+                <td>
+                  Poor native assistive technology communication. Screen readers had to guess document structure without explicit landmark roles.
+                </td>
+                <td>
+                  Semantic tags automatically map to WAI-ARIA landmark roles, enabling keyboard navigability and seamless screen reader narration.
+                </td>
+              </tr>
+
+              <!-- Row 11: Mobile Responsiveness -->
+              <tr>
+                <td>
+                  <span class="feature-num">11</span>
+                  <span class="feature-name">Mobile &amp; Viewport Control</span>
+                </td>
+                <td>
+                  Designed primarily for fixed-width desktop monitors. Mobile browsers scaled down full pages artificially.
+                </td>
+                <td>
+                  First-class responsive support via standard <code class="code-pill pill-green">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code> and responsive <code class="code-pill pill-green">&lt;picture&gt;</code>.
+                </td>
+              </tr>
+
+              <!-- Row 12: Presentational Elements -->
+              <tr>
+                <td>
+                  <span class="feature-num">12</span>
+                  <span class="feature-name">Obsolete Formatting Elements</span>
+                </td>
+                <td>
+                  Tolerated inline presentational tags such as <code class="code-pill pill-red">&lt;font&gt;</code>, <code class="code-pill pill-red">&lt;center&gt;</code>, <code class="code-pill pill-red">&lt;big&gt;</code>, and <code class="code-pill pill-red">&lt;strike&gt;</code>.
+                </td>
+                <td>
+                  Deprecated and eliminated visual tags in favor of strict separation of concerns, delegating all visual styling directly to CSS3.
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Takeaway Box -->
+        <aside class="takeaway-card" aria-label="Key Takeaway">
+          <div class="takeaway-icon" aria-hidden="true">&starf;</div>
+          <div class="takeaway-content">
+            <h3>Key Takeaway for Modern Web Engineers</h3>
+            <p>
+              HTML5 represents far more than cosmetic tag renaming: it establishes the core application architecture for the modern web. Adopting HTML5 eliminates plugin dependencies, dramatically improves page load performance, delivers superior SEO ranking via semantic hierarchy, and guarantees inclusive accessibility for users with screen readers and assistive devices.
+            </p>
+          </div>
+        </aside>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         GOOD HTML SECTION (SEMANTIC & ACCESSIBLE)
+         ========================================================================== -->
+    <section id="good-html" class="section-padding" aria-labelledby="good-html-heading">
+      <div class="container">
+        
+        <div class="showcase-header-bar">
+          <div class="showcase-title-group">
+            <span class="status-badge good">
+              <span aria-hidden="true">&check;</span> Recommended Practice
+            </span>
+            <h2 id="good-html-heading" class="showcase-title title-good">GOOD HTML &mdash; Semantic &amp; Accessible</h2>
+          </div>
+        </div>
+
+        <p class="section-description" style="margin-bottom: 2rem;">
+          Examine this production-grade, standards-compliant HTML5 document structure. Every element conveys explicit semantic meaning, heading levels follow a strict logical hierarchy, and landmark tags delineate page content.
+        </p>
+
+        <!-- Code Panel -->
+        <div class="code-panel panel-good" role="region" aria-label="Good HTML Code Example">
+          <div class="window-header">
+            <div class="window-dots" aria-hidden="true">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <span class="window-filename">semantic-template.html</span>
+            <span class="window-lang">HTML5 VALID</span>
+          </div>
+
+          <pre class="code-editor"><code><span class="code-line"><span class="hl-doctype">&lt;!DOCTYPE html&gt;</span></span><span class="code-line"><span class="hl-tag">&lt;html</span> <span class="hl-attr">lang</span>=<span class="hl-val">"en"</span><span class="hl-tag">&gt;</span></span><span class="code-line"><span class="hl-tag">&lt;head&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;meta</span> <span class="hl-attr">charset</span>=<span class="hl-val">"UTF-8"</span><span class="hl-tag">&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;meta</span> <span class="hl-attr">name</span>=<span class="hl-val">"viewport"</span> <span class="hl-attr">content</span>=<span class="hl-val">"width=device-width, initial-scale=1.0"</span><span class="hl-tag">&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;meta</span> <span class="hl-attr">name</span>=<span class="hl-val">"description"</span> <span class="hl-attr">content</span>=<span class="hl-val">"Comprehensive study guide on clean semantic markup."</span><span class="hl-tag">&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;title&gt;</span>Academic Research Journal &mdash; Computer Science<span class="hl-tag">&lt;/title&gt;</span></span><span class="code-line"><span class="hl-tag">&lt;/head&gt;</span></span><span class="code-line"><span class="hl-tag">&lt;body&gt;</span></span><span class="code-line">  <span class="hl-comment">&lt;!-- Landmark: Site Banner &amp; Navigation --&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;header&gt;</span></span><span class="code-line">    <span class="hl-tag">&lt;a</span> <span class="hl-attr">href</span>=<span class="hl-val">"/"</span> <span class="hl-attr">class</span>=<span class="hl-val">"brand-logo"</span><span class="hl-tag">&gt;</span>Tech Journal<span class="hl-tag">&lt;/a&gt;</span></span><span class="code-line">    <span class="hl-tag">&lt;nav</span> <span class="hl-attr">aria-label</span>=<span class="hl-val">"Main Menu"</span><span class="hl-tag">&gt;</span></span><span class="code-line">      <span class="hl-tag">&lt;ul&gt;</span></span><span class="code-line">        <span class="hl-tag">&lt;li&gt;&lt;a</span> <span class="hl-attr">href</span>=<span class="hl-val">"#articles"</span><span class="hl-tag">&gt;</span>Articles<span class="hl-tag">&lt;/a&gt;&lt;/li&gt;</span></span><span class="code-line">        <span class="hl-tag">&lt;li&gt;&lt;a</span> <span class="hl-attr">href</span>=<span class="hl-val">"#about"</span><span class="hl-tag">&gt;</span>About Us<span class="hl-tag">&lt;/a&gt;&lt;/li&gt;</span></span><span class="code-line">        <span class="hl-tag">&lt;li&gt;&lt;a</span> <span class="hl-attr">href</span>=<span class="hl-val">"#contact"</span><span class="hl-tag">&gt;</span>Contact<span class="hl-tag">&lt;/a&gt;&lt;/li&gt;</span></span><span class="code-line">      <span class="hl-tag">&lt;/ul&gt;</span></span><span class="code-line">    <span class="hl-tag">&lt;/nav&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;/header&gt;</span></span><span class="code-line"></span><span class="code-line">  <span class="hl-comment">&lt;!-- Landmark: Primary Document Content --&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;main&gt;</span></span><span class="code-line">    <span class="hl-tag">&lt;section</span> <span class="hl-attr">id</span>=<span class="hl-val">"articles"</span> <span class="hl-attr">aria-labelledby</span>=<span class="hl-val">"section-heading"</span><span class="hl-tag">&gt;</span></span><span class="code-line">      <span class="hl-tag">&lt;h1</span> <span class="hl-attr">id</span>=<span class="hl-val">"section-heading"</span><span class="hl-tag">&gt;</span>Frontiers in Distributed Systems<span class="hl-tag">&lt;/h1&gt;</span></span><span class="code-line"></span><span class="code-line">      <span class="hl-tag">&lt;article&gt;</span></span><span class="code-line">        <span class="hl-tag">&lt;h2&gt;</span>Consensus Protocols in Modern Computing<span class="hl-tag">&lt;/h2&gt;</span></span><span class="code-line">        <span class="hl-tag">&lt;p&gt;</span>Published on <span class="hl-tag">&lt;time</span> <span class="hl-attr">datetime</span>=<span class="hl-val">"2026-10-10"</span><span class="hl-tag">&gt;</span>October 10, 2026<span class="hl-tag">&lt;/time&gt;</span> by Dr. A. Sharma.<span class="hl-tag">&lt;/p&gt;</span></span><span class="code-line">        <span class="hl-tag">&lt;figure&gt;</span></span><span class="code-line">          <span class="hl-tag">&lt;img</span> <span class="hl-attr">src</span>=<span class="hl-val">"diagram.svg"</span> <span class="hl-attr">alt</span>=<span class="hl-val">"Architecture diagram contrasting Paxos and Raft cluster topologies"</span> <span class="hl-attr">width</span>=<span class="hl-val">"600"</span> <span class="hl-attr">height</span>=<span class="hl-val">"300"</span><span class="hl-tag">&gt;</span></span><span class="code-line">          <span class="hl-tag">&lt;figcaption&gt;</span>Figure 1: Comparison of cluster state replication topologies.<span class="hl-tag">&lt;/figcaption&gt;</span></span><span class="code-line">        <span class="hl-tag">&lt;/figure&gt;</span></span><span class="code-line">        <span class="hl-tag">&lt;p&gt;</span>Distributed consensus algorithms maintain unified state across unreliable node clusters.<span class="hl-tag">&lt;/p&gt;</span></span><span class="code-line">      <span class="hl-tag">&lt;/article&gt;</span></span><span class="code-line">    <span class="hl-tag">&lt;/section&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;/main&gt;</span></span><span class="code-line"></span><span class="code-line">  <span class="hl-comment">&lt;!-- Landmark: Document Footer --&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;footer&gt;</span></span><span class="code-line">    <span class="hl-tag">&lt;p&gt;</span>&copy; 2026 Department of IT. All rights reserved.<span class="hl-tag">&lt;/p&gt;</span></span><span class="code-line">    <span class="hl-tag">&lt;address&gt;</span>Contact: <span class="hl-tag">&lt;a</span> <span class="hl-attr">href</span>=<span class="hl-val">"mailto:lab@college.edu"</span><span class="hl-tag">&gt;</span>lab@college.edu<span class="hl-tag">&lt;/a&gt;&lt;/address&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;/footer&gt;</span></span><span class="code-line"><span class="hl-tag">&lt;/body&gt;</span></span><span class="code-line"><span class="hl-tag">&lt;/html&gt;</span></span></code></pre>
+        </div>
+
+        <!-- Explanation Cards -->
+        <div class="explanation-grid">
+          
+          <div class="explanation-card green-accent">
+            <span class="explanation-icon" aria-hidden="true">&phone;</span>
+            <h3 class="explanation-title">Semantic Meaning</h3>
+            <p class="explanation-desc">
+              Tags like <code class="code-pill">&lt;header&gt;</code>, <code class="code-pill">&lt;main&gt;</code>, and <code class="code-pill">&lt;article&gt;</code> describe the human and machine purpose of the content rather than its visual presentation.
+            </p>
+          </div>
+
+          <div class="explanation-card green-accent">
+            <span class="explanation-icon" aria-hidden="true">&empty;</span>
+            <h3 class="explanation-title">Screen Reader Accessibility</h3>
+            <p class="explanation-desc">
+              Assistive technologies automatically generate a landmark tree allowing blind users to jump directly to the navigation or main article using keyboard shortcuts.
+            </p>
+          </div>
+
+          <div class="explanation-card green-accent">
+            <span class="explanation-icon" aria-hidden="true">&sunglasses;</span>
+            <h3 class="explanation-title">SEO &amp; Indexing Benefits</h3>
+            <p class="explanation-desc">
+              Search engine web crawlers evaluate semantic tags and strict heading levels (<code class="code-pill">&lt;h1&gt;</code> &rarr; <code class="code-pill">&lt;h2&gt;</code>) to extract key article content for search rankings.
+            </p>
+          </div>
+
+          <div class="explanation-card green-accent">
+            <span class="explanation-icon" aria-hidden="true">&real;</span>
+            <h3 class="explanation-title">Maintainable Codebase</h3>
+            <p class="explanation-desc">
+              Eliminating non-descriptive nested divs makes code reviews, responsive CSS layouts, and multi-developer team collaboration intuitive and error-free.
+            </p>
+          </div>
+
+          <div class="explanation-card green-accent">
+            <span class="explanation-icon" aria-hidden="true">&clubs;</span>
+            <h3 class="explanation-title">Strict Document Structure</h3>
+            <p class="explanation-desc">
+              With a valid <code class="code-pill">&lt;html lang="en"&gt;</code>, viewport meta tag, and structured metadata, the browser renders in standards mode without triggering quirks mode.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         BAD HTML SECTION (COMMON MISTAKES & EXPLANATION)
+         ========================================================================== -->
+    <section id="bad-html" class="section-padding" style="background-color: var(--bg-white); border-top: 1px solid var(--border-light);" aria-labelledby="bad-html-heading">
+      <div class="container">
+        
+        <div class="showcase-header-bar">
+          <div class="showcase-title-group">
+            <span class="status-badge bad">
+              <span aria-hidden="true">&cross;</span> Intentionally Incorrect
+            </span>
+            <h2 id="bad-html-heading" class="showcase-title title-bad">BAD HTML &mdash; Common Anti-Patterns</h2>
+          </div>
+        </div>
+
+        <p class="section-description" style="margin-bottom: 2rem;">
+          The code below illustrates real-world flaws frequently observed in student submissions: excessive "div-soup", missing alternative text, broken heading ranks, and deprecated inline styling tags.
+        </p>
+
+        <!-- Flawed Code Panel -->
+        <div class="code-panel panel-bad" role="region" aria-label="Bad HTML Code Anti-pattern Example">
+          <div class="window-header">
+            <div class="window-dots" aria-hidden="true">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <span class="window-filename">anti-pattern-example.html</span>
+            <span class="window-lang">ANTI-PATTERN</span>
+          </div>
+
+          <pre class="code-editor"><code><span class="code-line"><span class="hl-comment">&lt;!-- FLAW: Missing DOCTYPE, missing &lt;html lang&gt;, and missing viewport meta --&gt;</span></span><span class="code-line"><span class="hl-tag">&lt;html&gt;</span></span><span class="code-line"><span class="hl-tag">&lt;head&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;title&gt;</span>My Web Page<span class="hl-tag">&lt;/title&gt;</span></span><span class="code-line"><span class="hl-tag">&lt;/head&gt;</span></span><span class="code-line"><span class="hl-tag">&lt;body&gt;</span></span><span class="code-line">  <span class="hl-comment">&lt;!-- FLAW 1: Non-semantic "div-soup" instead of &lt;header&gt; and &lt;nav&gt; --&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;div</span> <span class="hl-attr">class</span>=<span class="hl-val">"top-bar"</span><span class="hl-tag">&gt;</span></span><span class="code-line">    <span class="hl-tag">&lt;div</span> <span class="hl-attr">class</span>=<span class="hl-val">"logo"</span><span class="hl-tag">&gt;&lt;b&gt;</span>TechSite<span class="hl-tag">&lt;/b&gt;&lt;/div&gt;</span></span><span class="code-line">    <span class="hl-comment">&lt;!-- FLAW: Clickable div with no href or keyboard accessibility --&gt;</span></span><span class="code-line">    <span class="hl-tag">&lt;div</span> <span class="hl-attr">class</span>=<span class="hl-val">"nav-button"</span> <span class="hl-attr">onclick</span>=<span class="hl-val">"go()"</span><span class="hl-tag">&gt;</span>Click to Visit<span class="hl-tag">&lt;/div&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;/div&gt;</span></span><span class="code-line"></span><span class="code-line">  <span class="hl-comment">&lt;!-- FLAW 2: Obsolete &lt;center&gt; and &lt;font&gt; presentational markup --&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;center&gt;</span></span><span class="code-line">    <span class="hl-tag">&lt;font</span> <span class="hl-attr">color</span>=<span class="hl-val">"red"</span> <span class="hl-attr">size</span>=<span class="hl-val">"6"</span><span class="hl-tag">&gt;</span>Welcome to Our Page<span class="hl-tag">&lt;/font&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;/center&gt;</span></span><span class="code-line"></span><span class="code-line">  <span class="hl-comment">&lt;!-- FLAW 3: Disjointed heading levels (h1 directly followed by h4) --&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;h1&gt;</span>Main Subject Article<span class="hl-tag">&lt;/h1&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;h4&gt;</span>Subtopic Without Intermediate h2 or h3<span class="hl-tag">&lt;/h4&gt;</span></span><span class="code-line"></span><span class="code-line">  <span class="hl-comment">&lt;!-- FLAW 4: Image missing alt attribute or using non-descriptive alt --&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;img</span> <span class="hl-attr">src</span>=<span class="hl-val">"photo.jpg"</span><span class="hl-tag">&gt;</span></span><span class="code-line"></span><span class="code-line">  <span class="hl-comment">&lt;!-- FLAW 5: Form inputs without linked &lt;label&gt; tags --&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;div</span> <span class="hl-attr">class</span>=<span class="hl-val">"form-box"</span><span class="hl-tag">&gt;</span></span><span class="code-line">    Email: <span class="hl-tag">&lt;input</span> <span class="hl-attr">type</span>=<span class="hl-val">"text"</span> <span class="hl-attr">name</span>=<span class="hl-val">"mail"</span><span class="hl-tag">&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;/div&gt;</span></span><span class="code-line"></span><span class="code-line">  <span class="hl-comment">&lt;!-- FLAW: Using repetitive &lt;br&gt; for structural spacing --&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;br&gt;&lt;br&gt;&lt;br&gt;</span></span><span class="code-line">  <span class="hl-tag">&lt;div</span> <span class="hl-attr">class</span>=<span class="hl-val">"footer"</span><span class="hl-tag">&gt;</span>Copyright 2026<span class="hl-tag">&lt;/div&gt;</span></span><span class="code-line"><span class="hl-tag">&lt;/body&gt;</span></span><span class="code-line"><span class="hl-tag">&lt;/html&gt;</span></span></code></pre>
+        </div>
+
+        <!-- 5 Detailed Mistake Diagnostic Cards -->
+        <div class="mistakes-container">
+          
+          <!-- Mistake 1 -->
+          <article class="mistake-card">
+            <div class="mistake-header">
+              <span class="mistake-index">ERROR 01</span>
+              <h3 class="mistake-title">"Div-Soup" and Non-Semantic Layout Architecture</h3>
+            </div>
+            <div class="mistake-grid">
+              <div class="mistake-box flaw">
+                <h4>What Is Wrong &amp; Why It Matters</h4>
+                <p>
+                  Using generic <code class="code-pill pill-red">&lt;div class="top-bar"&gt;</code> robs browsers and assistive tools of navigational context. Screen readers cannot locate landmark navigation points, and search engine crawlers struggle to discern primary content from supplementary sidebars.
+                </p>
+              </div>
+              <div class="mistake-box solution">
+                <h4>Recommended Correction</h4>
+                <p>
+                  Replace wrapper divs with native HTML5 semantic landmarks: <code class="code-pill pill-green">&lt;header&gt;</code>, <code class="code-pill pill-green">&lt;nav&gt;</code>, <code class="code-pill pill-green">&lt;main&gt;</code>, and <code class="code-pill pill-green">&lt;footer&gt;</code>.
+                </p>
+                <div class="mini-snippet">&lt;header&gt;<br>&nbsp;&nbsp;&lt;nav aria-label="Main"&gt;...&lt;/nav&gt;<br>&lt;/header&gt;</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Mistake 2 -->
+          <article class="mistake-card">
+            <div class="mistake-header">
+              <span class="mistake-index">ERROR 02</span>
+              <h3 class="mistake-title">Missing or Non-Descriptive Image Alternative Text</h3>
+            </div>
+            <div class="mistake-grid">
+              <div class="mistake-box flaw">
+                <h4>What Is Wrong &amp; Why It Matters</h4>
+                <p>
+                  Omitting the <code class="code-pill pill-red">alt</code> attribute (or writing dummy strings like <code class="code-pill">alt="image"</code>) leaves visually impaired users stranded. Screen readers announce cryptic raw image file names (e.g., "photo-9842.jpg"), failing WCAG 2.1 compliance.
+                </p>
+              </div>
+              <div class="mistake-box solution">
+                <h4>Recommended Correction</h4>
+                <p>
+                  Always provide accurate, descriptive alternative text conveying the meaning of the image, or set <code class="code-pill pill-green">alt=""</code> if the image is purely decorative.
+                </p>
+                <div class="mini-snippet">&lt;img src="graph.png" alt="Bar chart showing server response latency across 5 regional clusters"&gt;</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Mistake 3 -->
+          <article class="mistake-card">
+            <div class="mistake-header">
+              <span class="mistake-index">ERROR 03</span>
+              <h3 class="mistake-title">Broken Heading Rank Hierarchy (Skipping Levels)</h3>
+            </div>
+            <div class="mistake-grid">
+              <div class="mistake-box flaw">
+                <h4>What Is Wrong &amp; Why It Matters</h4>
+                <p>
+                  Jumping straight from an <code class="code-pill">&lt;h1&gt;</code> to an <code class="code-pill pill-red">&lt;h4&gt;</code> breaks the document outline. Screen reader users frequently navigate pages by jumping across heading ranks; skipping levels creates confusion regarding document structure.
+                </p>
+              </div>
+              <div class="mistake-box solution">
+                <h4>Recommended Correction</h4>
+                <p>
+                  Follow a consistent hierarchical sequence: exactly one <code class="code-pill pill-green">&lt;h1&gt;</code> for the document title, followed by <code class="code-pill pill-green">&lt;h2&gt;</code> for major sections and <code class="code-pill pill-green">&lt;h3&gt;</code> for subsections.
+                </p>
+                <div class="mini-snippet">&lt;h1&gt;Distributed Systems&lt;/h1&gt;<br>&lt;h2&gt;Raft Consensus Algorithm&lt;/h2&gt;<br>&lt;h3&gt;Leader Election Phase&lt;/h3&gt;</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Mistake 4 -->
+          <article class="mistake-card">
+            <div class="mistake-header">
+              <span class="mistake-index">ERROR 04</span>
+              <h3 class="mistake-title">Obsolete Presentational Elements (&lt;center&gt;, &lt;font&gt;, &lt;marquee&gt;)</h3>
+            </div>
+            <div class="mistake-grid">
+              <div class="mistake-box flaw">
+                <h4>What Is Wrong &amp; Why It Matters</h4>
+                <p>
+                  Presentational elements like <code class="code-pill pill-red">&lt;center&gt;</code> and <code class="code-pill pill-red">&lt;font color="red"&gt;</code> were officially deprecated over a decade ago. They mix layout styling directly with content, defeating CSS separation of concerns.
+                </p>
+              </div>
+              <div class="mistake-box solution">
+                <h4>Recommended Correction</h4>
+                <p>
+                  Use clean semantic tags and delegate all text alignment, colors, typography, and animation to modern CSS stylesheets.
+                </p>
+                <div class="mini-snippet">&lt;p class="headline-alert"&gt;Notice text&lt;/p&gt;<br>/* In CSS: .headline-alert { color: #dc2626; text-align: center; } */</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Mistake 5 -->
+          <article class="mistake-card">
+            <div class="mistake-header">
+              <span class="mistake-index">ERROR 05</span>
+              <h3 class="mistake-title">Unlabeled Form Inputs and Plain Text Fields</h3>
+            </div>
+            <div class="mistake-grid">
+              <div class="mistake-box flaw">
+                <h4>What Is Wrong &amp; Why It Matters</h4>
+                <p>
+                  Writing bare text alongside <code class="code-pill pill-red">&lt;input type="text"&gt;</code> without an associated <code class="code-pill">&lt;label for="..."&gt;</code> prevents screen readers from announcing what the field requires and significantly reduces mobile tap target accessibility.
+                </p>
+              </div>
+              <div class="mistake-box solution">
+                <h4>Recommended Correction</h4>
+                <p>
+                  Pair every input with an explicit <code class="code-pill pill-green">&lt;label for="id"&gt;</code> and leverage HTML5 types such as <code class="code-pill pill-green">type="email"</code> with the <code class="code-pill pill-green">required</code> attribute.
+                </p>
+                <div class="mini-snippet">&lt;label for="user-email"&gt;Email Address&lt;/label&gt;<br>&lt;input type="email" id="user-email" name="email" required&gt;</div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         HTML5 FEATURE SHOWCASE (4 CARDS)
+         ========================================================================== -->
+    <section id="features" class="section-padding" aria-labelledby="features-heading">
+      <div class="container">
+        
+        <div class="section-header">
+          <span class="section-eyebrow violet">Core Innovations</span>
+          <h2 id="features-heading" class="section-title">HTML5 Feature Showcase</h2>
+          <p class="section-description">
+            Explore four foundational pillars introduced by the HTML5 specification that revolutionized web application engineering.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          
+          <!-- Card A: Semantic Elements -->
+          <article class="feature-card" aria-labelledby="feature-a-title">
+            <div class="feature-card-header">
+              <span class="feature-card-badge">Architecture</span>
+              <h3 id="feature-a-title" class="feature-card-title">A. Semantic Layout Elements</h3>
+              <p class="feature-card-desc">
+                Semantic elements explicitly define document structure for both browsers and developers. Instead of non-descriptive classes, elements communicate purpose directly to search engines and assistive software.
+              </p>
+            </div>
+            <div class="feature-card-code">
+              <span class="hl-comment">&lt;!-- Landmark Layout Architecture --&gt;</span><br>
+              <span class="hl-tag">&lt;header&gt;</span>Site logo and global branding<span class="hl-tag">&lt;/header&gt;</span><br>
+              <span class="hl-tag">&lt;nav&gt;</span>Primary navigation menu<span class="hl-tag">&lt;/nav&gt;</span><br>
+              <span class="hl-tag">&lt;main&gt;</span><br>
+              &nbsp;&nbsp;<span class="hl-tag">&lt;section&gt;</span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;<span class="hl-tag">&lt;article&gt;</span>Independent, syndicatable content<span class="hl-tag">&lt;/article&gt;</span><br>
+              &nbsp;&nbsp;<span class="hl-tag">&lt;/section&gt;</span><br>
+              &nbsp;&nbsp;<span class="hl-tag">&lt;aside&gt;</span>Sidebar or related supplementary data<span class="hl-tag">&lt;/aside&gt;</span><br>
+              <span class="hl-tag">&lt;/main&gt;</span><br>
+              <span class="hl-tag">&lt;footer&gt;</span>Copyright, terms, and contact<span class="hl-tag">&lt;/footer&gt;</span>
+            </div>
+          </article>
+
+          <!-- Card B: Native Multimedia -->
+          <article class="feature-card" aria-labelledby="feature-b-title">
+            <div class="feature-card-header">
+              <span class="feature-card-badge">Media Streaming</span>
+              <h3 id="feature-b-title" class="feature-card-title">B. Native Audio &amp; Video</h3>
+              <p class="feature-card-desc">
+                HTML5 completely obsoleted Flash by establishing first-class browser media players. Multiple source formats can be provided with automatic browser fallback and track subtitle support.
+              </p>
+            </div>
+            <div class="feature-card-code">
+              <span class="hl-comment">&lt;!-- Native Video Player with Multi-Codec Fallback --&gt;</span><br>
+              <span class="hl-tag">&lt;video</span> <span class="hl-attr">controls</span> <span class="hl-attr">preload</span>=<span class="hl-val">"metadata"</span> <span class="hl-attr">width</span>=<span class="hl-val">"640"</span> <span class="hl-attr">height</span>=<span class="hl-val">"360"</span><span class="hl-tag">&gt;</span><br>
+              &nbsp;&nbsp;<span class="hl-tag">&lt;source</span> <span class="hl-attr">src</span>=<span class="hl-val">"lecture.mp4"</span> <span class="hl-attr">type</span>=<span class="hl-val">"video/mp4"</span><span class="hl-tag">&gt;</span><br>
+              &nbsp;&nbsp;<span class="hl-tag">&lt;source</span> <span class="hl-attr">src</span>=<span class="hl-val">"lecture.webm"</span> <span class="hl-attr">type</span>=<span class="hl-val">"video/webm"</span><span class="hl-tag">&gt;</span><br>
+              &nbsp;&nbsp;<span class="hl-tag">&lt;track</span> <span class="hl-attr">src</span>=<span class="hl-val">"captions.vtt"</span> <span class="hl-attr">kind</span>=<span class="hl-val">"subtitles"</span> <span class="hl-attr">srclang</span>=<span class="hl-val">"en"</span><span class="hl-tag">&gt;</span><br>
+              &nbsp;&nbsp;Your browser does not support the video tag.<br>
+              <span class="hl-tag">&lt;/video&gt;</span><br><br>
+              <span class="hl-comment">&lt;!-- Native Audio Player --&gt;</span><br>
+              <span class="hl-tag">&lt;audio</span> <span class="hl-attr">controls</span><span class="hl-tag">&gt;</span><br>
+              &nbsp;&nbsp;<span class="hl-tag">&lt;source</span> <span class="hl-attr">src</span>=<span class="hl-val">"podcast.mp3"</span> <span class="hl-attr">type</span>=<span class="hl-val">"audio/mpeg"</span><span class="hl-tag">&gt;</span><br>
+              <span class="hl-tag">&lt;/audio&gt;</span>
+            </div>
+          </article>
+
+          <!-- Card C: Modern Forms -->
+          <article class="feature-card" aria-labelledby="feature-c-title">
+            <div class="feature-card-header">
+              <span class="feature-card-badge">Data Entry</span>
+              <h3 id="feature-c-title" class="feature-card-title">C. Modern Forms &amp; Native Validation</h3>
+              <p class="feature-card-desc">
+                Built-in browser validation ensures user inputs conform to expected patterns (emails, dates, telephone numbers) without writing a single line of JavaScript. Virtual keyboards adapt automatically on mobile devices.
+              </p>
+            </div>
+            <div class="feature-card-code">
+              <span class="hl-comment">&lt;!-- Declarative Form Validation --&gt;</span><br>
+              <span class="hl-tag">&lt;form</span> <span class="hl-attr">action</span>=<span class="hl-val">"/submit"</span> <span class="hl-attr">method</span>=<span class="hl-val">"post"</span><span class="hl-tag">&gt;</span><br>
+              &nbsp;&nbsp;<span class="hl-tag">&lt;label</span> <span class="hl-attr">for</span>=<span class="hl-val">"email"</span><span class="hl-tag">&gt;</span>Email:<span class="hl-tag">&lt;/label&gt;</span><br>
+              &nbsp;&nbsp;<span class="hl-tag">&lt;input</span> <span class="hl-attr">type</span>=<span class="hl-val">"email"</span> <span class="hl-attr">id</span>=<span class="hl-val">"email"</span> <span class="hl-attr">name</span>=<span class="hl-val">"user_email"</span> <span class="hl-attr">required</span><span class="hl-tag">&gt;</span><br><br>
+              &nbsp;&nbsp;<span class="hl-tag">&lt;label</span> <span class="hl-attr">for</span>=<span class="hl-val">"dob"</span><span class="hl-tag">&gt;</span>Date of Birth:<span class="hl-tag">&lt;/label&gt;</span><br>
+              &nbsp;&nbsp;<span class="hl-tag">&lt;input</span> <span class="hl-attr">type</span>=<span class="hl-val">"date"</span> <span class="hl-attr">id</span>=<span class="hl-val">"dob"</span> <span class="hl-attr">name</span>=<span class="hl-val">"birth_date"</span> <span class="hl-attr">required</span><span class="hl-tag">&gt;</span><br><br>
+              &nbsp;&nbsp;<span class="hl-tag">&lt;label</span> <span class="hl-attr">for</span>=<span class="hl-val">"qty"</span><span class="hl-tag">&gt;</span>Quantity (1&ndash;10):<span class="hl-tag">&lt;/label&gt;</span><br>
+              &nbsp;&nbsp;<span class="hl-tag">&lt;input</span> <span class="hl-attr">type</span>=<span class="hl-val">"number"</span> <span class="hl-attr">id</span>=<span class="hl-val">"qty"</span> <span class="hl-attr">min</span>=<span class="hl-val">"1"</span> <span class="hl-attr">max</span>=<span class="hl-val">"10"</span> <span class="hl-attr">value</span>=<span class="hl-val">"1"</span><span class="hl-tag">&gt;</span><br><br>
+              &nbsp;&nbsp;<span class="hl-tag">&lt;button</span> <span class="hl-attr">type</span>=<span class="hl-val">"submit"</span><span class="hl-tag">&gt;</span>Submit Form<span class="hl-tag">&lt;/button&gt;</span><br>
+              <span class="hl-tag">&lt;/form&gt;</span>
+            </div>
+          </article>
+
+          <!-- Card D: Canvas and Graphics -->
+          <article class="feature-card" aria-labelledby="feature-d-title">
+            <div class="feature-card-header">
+              <span class="feature-card-badge">Graphics &amp; Visuals</span>
+              <h3 id="feature-d-title" class="feature-card-title">D. Canvas &amp; Dynamic Graphics</h3>
+              <p class="feature-card-desc">
+                The <code class="code-pill">&lt;canvas&gt;</code> element defines a resolution-dependent bitmap canvas for rendering 2D shapes, charts, and WebGL graphics. While rendering is script-driven, the HTML container provides accessible fallback content.
+              </p>
+            </div>
+            <div class="feature-card-code">
+              <span class="hl-comment">&lt;!-- HTML5 Canvas Container Element --&gt;</span><br>
+              <span class="hl-tag">&lt;canvas</span> <span class="hl-attr">id</span>=<span class="hl-val">"dataChart"</span> <span class="hl-attr">width</span>=<span class="hl-val">"600"</span> <span class="hl-attr">height</span>=<span class="hl-val">"300"</span> <span class="hl-attr">role</span>=<span class="hl-val">"img"</span> <span class="hl-attr">aria-label</span>=<span class="hl-val">"Network bandwidth graph"</span><span class="hl-tag">&gt;</span><br>
+              &nbsp;&nbsp;<span class="hl-comment">&lt;!-- Fallback content for older browsers or assistive tools --&gt;</span><br>
+              &nbsp;&nbsp;<span class="hl-tag">&lt;p&gt;</span>Your browser does not support the HTML5 canvas tag. Data summary: Network traffic peaked at 450 MB/s at 14:00.<span class="hl-tag">&lt;/p&gt;</span><br>
+              <span class="hl-tag">&lt;/canvas&gt;</span><br><br>
+              <span class="hl-comment">&lt;!-- Note: Pixel rendering on canvas is handled via the JavaScript Canvas 2D/WebGL API; the HTML tag provides the drawing surface and a11y description. --&gt;</span>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         KNOWLEDGE SUMMARY & CONCLUSION
+         ========================================================================== -->
+    <section id="conclusion" class="section-padding summary-section" aria-labelledby="summary-heading">
+      <div class="container">
+        
+        <div class="section-header">
+          <span class="section-eyebrow blue">Key Takeaways</span>
+          <h2 id="summary-heading" class="section-title">Why Modern HTML Matters</h2>
+          <p class="section-description">
+            Five core engineering principles that establish HTML5 as the backbone of modern web applications.
+          </p>
+        </div>
+
+        <!-- 5 Benefits Grid -->
+        <div class="benefits-grid">
+          
+          <div class="benefit-item">
+            <div class="benefit-icon-box" aria-hidden="true">01</div>
+            <h3 class="benefit-title">Semantic Structure</h3>
+            <p class="benefit-text">Meaningful tags communicate layout hierarchy to search engines and machine parsers.</p>
+          </div>
+
+          <div class="benefit-item">
+            <div class="benefit-icon-box" aria-hidden="true">02</div>
+            <h3 class="benefit-title">Accessibility (A11y)</h3>
+            <p class="benefit-text">Built-in ARIA landmark mappings empower screen reader and keyboard-only navigation.</p>
+          </div>
+
+          <div class="benefit-item">
+            <div class="benefit-icon-box" aria-hidden="true">03</div>
+            <h3 class="benefit-title">Native Multimedia</h3>
+            <p class="benefit-text">Zero third-party plugin bloat; hardware-accelerated audio and video playback.</p>
+          </div>
+
+          <div class="benefit-item">
+            <div class="benefit-icon-box" aria-hidden="true">04</div>
+            <h3 class="benefit-title">Declarative Forms</h3>
+            <p class="benefit-text">Native mobile keyboards and browser validation without custom JavaScript scripts.</p>
+          </div>
+
+          <div class="benefit-item">
+            <div class="benefit-icon-box" aria-hidden="true">05</div>
+            <h3 class="benefit-title">Clean Maintainability</h3>
+            <p class="benefit-text">Eliminates nested div soup, creating readable and future-proof codebases for engineering teams.</p>
+          </div>
+
+        </div>
+
+        <!-- Academic Conclusion Box -->
+        <article class="conclusion-box" aria-labelledby="academic-conclusion-heading">
+          <h3 id="academic-conclusion-heading">Academic Conclusion &amp; Architectural Summary</h3>
+          <p>
+            The transition from legacy HTML versions to HTML5 represents one of the most transformative milestones in the history of internet computing. Early specifications treated HTML as a document presentation language, frequently conflating content structure with visual styling through tags like <code class="code-pill">&lt;font&gt;</code> and <code class="code-pill">&lt;center&gt;</code>.
+          </p>
+          <p>
+            HTML5 permanently resolved this tension by enforcing a strict separation of concerns: <strong>HTML5 governs semantic structure and content</strong>, <strong>CSS3 governs presentation and responsive layout</strong>, and <strong>JavaScript governs dynamic behavior</strong>. Today, maintained continuously as the WHATWG Living Standard, HTML provides a robust, accessible, and high-performance foundation for everything from simple scientific papers to complex cloud-scale web applications.
+          </p>
+
+          <div class="conclusion-quote-banner">
+            <p class="conclusion-quote">
+              &ldquo;Write meaningful markup. Build accessible experiences. Follow modern web standards.&rdquo;
+            </p>
+          </div>
+        </article>
+
+        <!-- Practical Submission Card -->
+        <section class="submission-card" aria-labelledby="submission-title-heading">
+          <div class="submission-header">
+            <h3 id="submission-title-heading" class="submission-title">Laboratory Practical Submission Record</h3>
+            <span class="submission-badge">B.Tech Academic Evaluation</span>
+          </div>
+          <div class="submission-body">
+            <div class="submission-grid">
+              
+              <div class="submission-item">
+                <span class="submission-label">Student Name</span>
+                <span class="submission-val placeholder-edit">[Enter Student Name]</span>
+              </div>
+
+              <div class="submission-item">
+                <span class="submission-label">Permanent Registration Number (PRN)</span>
+                <span class="submission-val placeholder-edit">[Enter PRN]</span>
+              </div>
+
+              <div class="submission-item">
+                <span class="submission-label">Engineering Branch</span>
+                <span class="submission-val">Information Technology</span>
+              </div>
+
+              <div class="submission-item">
+                <span class="submission-label">Academic Year</span>
+                <span class="submission-val">Third Year B.Tech</span>
+              </div>
+
+              <div class="submission-item">
+                <span class="submission-label">Course / Subject</span>
+                <span class="submission-val">Full Stack Development</span>
+              </div>
+
+              <div class="submission-item">
+                <span class="submission-label">Practical Assignment</span>
+                <span class="submission-val">HTML vs HTML5: Features, Differences &amp; Best Practices</span>
+              </div>
+
+              <div class="submission-item" style="grid-column: 1 / -1;">
+                <span class="submission-label">Technology Stack</span>
+                <span class="submission-val">Pure HTML5 &amp; CSS3 (Standards-Compliant, Zero Framework Dependencies)</span>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       DARK FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <span class="logo-code">&lt;/&gt;</span>
+            <span>WEB LAB</span>
+          </div>
+          <p class="footer-desc">
+            An educational reference platform demonstrating semantic HTML5, WCAG accessibility guidelines, and modern web development standards for Information Technology students.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="#hero">Hero Overview</a></li>
+            <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#comparison">Technical Comparison</a></li>
+            <li><a href="#good-html">Good HTML Practices</a></li>
+            <li><a href="#bad-html">Bad HTML Pitfalls</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Curriculum Topics</h4>
+          <ul class="footer-links">
+            <li><a href="#features">HTML5 Features</a></li>
+            <li><a href="#good-html">Landmark Semantics</a></li>
+            <li><a href="#comparison">Storage &amp; Media</a></li>
+            <li><a href="#conclusion">Academic Conclusion</a></li>
+            <li><a href="#conclusion">Lab Submission</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">
+          &copy; 2026 Department of Information Technology. Built for Academic Demonstration.
+        </p>
+        <span class="footer-badge">Academic Practical Project | HTML5 &amp; CSS3</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
